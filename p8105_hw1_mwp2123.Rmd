@@ -2,11 +2,12 @@
 title: "Homework 1"
 author: "Murrel Pereira"
 date: "9/19/2020"
-output: github_document
+output: html_document
+
 ---
 This is my solution to HW1
 
-```{r echo = FALSE}
+```{r echo=FALSE}
 library(tidyverse)
 ```
 
@@ -36,7 +37,7 @@ mean(pull(prob1_df, factor_vec))
 
 I can take the mean of numbers and logical but not characters or factor
 
-```{r try_numeric echo=FALSE}
+```{r echo=FALSE}
 as.numeric(pull(prob1_df, samp))
 as.numeric(pull(prob1_df, samp_gt_0))
 as.numeric(pull(prob1_df, char_vec))
@@ -58,3 +59,6 @@ We cannot use these for the factors
 ```{r}
 data("penguins", package = "palmerpenguins")
 ```
+
+The penguins dataset is a compilation of observations of penguin species (`r paste(levels(penguins$species), collapse = ", ")`) on the islands of `r paste(levels(penguins$island), collapse = ", ")` from `r min(penguins$year)` - `r max(penguins$year)`. Bill length, bill depth, flipper length, body mass, and sex were variables that were captured.
+
