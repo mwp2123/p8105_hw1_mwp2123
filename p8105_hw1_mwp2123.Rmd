@@ -2,12 +2,11 @@
 title: "Homework 1"
 author: "Murrel Pereira"
 date: "9/19/2020"
-output: html_document
-
+output: github_document
 ---
 This is my solution to HW1
 
-```{r echo=FALSE}
+```{r collapse=TRUE}
 library(tidyverse)
 ```
 
@@ -27,7 +26,7 @@ tibble(
 
 Take the mean of each variable in my data frame
 
-```{r mean_pull_var}
+```{r collapse = TRUE}
 mean(pull(prob1_df, samp))
 mean(pull(prob1_df, samp_gt_0))
 mean(pull(prob1_df, char_vec))
@@ -37,7 +36,7 @@ mean(pull(prob1_df, factor_vec))
 
 I can take the mean of numbers and logical but not characters or factor
 
-```{r echo=FALSE}
+```{r collapse = TRUE}
 as.numeric(pull(prob1_df, samp))
 as.numeric(pull(prob1_df, samp_gt_0))
 as.numeric(pull(prob1_df, char_vec))
@@ -47,12 +46,12 @@ as.numeric(pull(prob1_df, factor_vec))
 
 
 
-```{r}
+```{r collapse=TRUE}
 as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
 as.numeric(as.factor(pull(prob1_df, samp_gt_0))) * pull(prob1_df, samp)
 ```
-We cannot use these for the factors
+We cannot use factors and multiply it with a numeric but we can coerce a factor to be a numeric to use multiplication.
 
 ## Problem 2
 
@@ -60,5 +59,12 @@ We cannot use these for the factors
 data("penguins", package = "palmerpenguins")
 ```
 
-The penguins dataset is a compilation of observations of penguin species (`r paste(levels(penguins$species), collapse = ", ")`) on the islands of `r paste(levels(penguins$island), collapse = ", ")` from `r min(penguins$year)` - `r max(penguins$year)`. Bill length, bill depth, flipper length, body mass, and sex were variables that were captured.
+The penguins dataset is a compilation of observations of penguin species (`r paste(levels(penguins$species), collapse = ", ")`) on the islands of `r paste(levels(penguins$island), collapse = ", ")` from `r min(penguins$year)` - `r max(penguins$year)`. Bill length, bill depth, flipper length, body mass, and sex were variables that were captured. The dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns. The mean flipper length was `r round(mean(penguins$flipper_length_mm, na.rm=TRUE),2)` mm. 
+
+```{r warning = FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color=species)) + geom_point()
+
+ggsave("scatter_plot.pdf", height = 4, width = 6)
+
+```
 
